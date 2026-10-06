@@ -1573,82 +1573,82 @@ export const PdfDebugModal: React.FC<PdfDebugModalProps> = ({
                   선택 해제 (전체 항목 목록으로 돌아가기)
                 </button>
               </div>
-            ) : null}
+            ) : (
+              /* Case B: List of Placed Fields (shown when no item is selected) */
+              <div className="flex-1 flex flex-col min-h-0">
+                
+                {/* Search Box */}
+                <div className="p-3 border-b border-slate-800 bg-slate-900/60">
+                  <div className="relative">
+                    <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder="배치된 항목 검색 (예: 성명, 회사)..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-8 pr-3 py-1.5 bg-slate-950 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                    />
+                  </div>
+                </div>
 
-            {/* Case B: List of Placed Fields */}
-            <div className="flex-1 flex flex-col min-h-0">
-              
-              {/* Search Box */}
-              <div className="p-3 border-b border-slate-800 bg-slate-900/60">
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
-                  <input
-                    type="text"
-                    placeholder="배치된 항목 검색 (예: 성명, 회사)..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-8 pr-3 py-1.5 bg-slate-950 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
-                  />
+                {/* Items List */}
+                <div className="flex-1 overflow-y-auto p-2 space-y-1">
+                  {filteredKeys.length > 0 ? (
+                    filteredKeys.map(key => {
+                      const pos = currentCoords[key];
+                      const isSelected = selectedField === key;
+                      const { display, isChecked } = getFieldValue(key);
+                      const friendly = getFieldFriendlyName(key);
+
+                      return (
+                        <div
+                          key={key}
+                          onClick={() => setSelectedField(key)}
+                          className={`p-2.5 rounded-xl transition cursor-pointer flex items-center justify-between gap-2 border ${
+                            isSelected 
+                              ? 'bg-blue-600/20 border-blue-500/50' 
+                              : 'bg-slate-800/40 hover:bg-slate-800 border-slate-800/60'
+                          }`}
+                        >
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-xs font-bold text-white truncate">
+                                {friendly}
+                              </span>
+                            </div>
+                            <div className="text-[11px] text-slate-400 truncate mt-0.5">
+                              {pos.type === 'check' 
+                                ? (isChecked ? '✓ 선택됨' : '선택 안 됨')
+                                : (display || '(입력값 없음)')
+                              }
+                            </div>
+                          </div>
+                          <ChevronRight className={`w-4 h-4 shrink-0 transition ${isSelected ? 'text-blue-400 translate-x-0.5' : 'text-slate-600'}`} />
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="p-6 text-center text-xs text-slate-500">
+                      검색 결과가 없습니다.
+                    </div>
+                  )}
+                </div>
+
+                {/* Bottom Quick Add Field Button */}
+                <div className="p-3 border-t border-slate-800 bg-slate-900/90">
+                  <button
+                    onClick={() => {
+                      setPendingAddPos({ x: 150, y: 500 });
+                      setIsFieldPickerOpen(true);
+                    }}
+                    className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm cursor-pointer"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>새 항목 추가하기</span>
+                  </button>
                 </div>
               </div>
-
-              {/* Items List */}
-              <div className="flex-1 overflow-y-auto p-2 space-y-1">
-                {filteredKeys.length > 0 ? (
-                  filteredKeys.map(key => {
-                    const pos = currentCoords[key];
-                    const isSelected = selectedField === key;
-                    const { display, isChecked } = getFieldValue(key);
-                    const friendly = getFieldFriendlyName(key);
-
-                    return (
-                      <div
-                        key={key}
-                        onClick={() => setSelectedField(key)}
-                        className={`p-2.5 rounded-xl transition cursor-pointer flex items-center justify-between gap-2 border ${
-                          isSelected 
-                            ? 'bg-blue-600/20 border-blue-500/50' 
-                            : 'bg-slate-800/40 hover:bg-slate-800 border-slate-800/60'
-                        }`}
-                      >
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-bold text-white truncate">
-                              {friendly}
-                            </span>
-                          </div>
-                          <div className="text-[11px] text-slate-400 truncate mt-0.5">
-                            {pos.type === 'check' 
-                              ? (isChecked ? '✓ 선택됨' : '선택 안 됨')
-                              : (display || '(입력값 없음)')
-                            }
-                          </div>
-                        </div>
-                        <ChevronRight className={`w-4 h-4 shrink-0 transition ${isSelected ? 'text-blue-400 translate-x-0.5' : 'text-slate-600'}`} />
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="p-6 text-center text-xs text-slate-500">
-                    검색 결과가 없습니다.
-                  </div>
-                )}
-              </div>
-
-              {/* Bottom Quick Add Field Button */}
-              <div className="p-3 border-t border-slate-800 bg-slate-900/90">
-                <button
-                  onClick={() => {
-                    setPendingAddPos({ x: 150, y: 500 });
-                    setIsFieldPickerOpen(true);
-                  }}
-                  className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm cursor-pointer"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>새 항목 추가하기</span>
-                </button>
-              </div>
-            </div>
+            )}
 
           </div>
         </div>
