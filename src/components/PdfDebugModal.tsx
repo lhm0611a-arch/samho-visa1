@@ -96,6 +96,7 @@ export const PdfDebugModal: React.FC<PdfDebugModalProps> = ({
   const [draggingField, setDraggingField] = useState<string | null>(null);
   const dragStartRef = useRef<{ clientX: number; clientY: number; initialX: number; initialY: number } | null>(null);
   const [resizingField, setResizingField] = useState<string | null>(null);
+  const [resizeDirection, setResizeDirection] = useState<'both' | 'width' | 'height'>('both');
   const resizeStartRef = useRef<{ clientX: number; clientY: number; initialW: number; initialH: number } | null>(null);
 
   // Custom Docs Registry
@@ -171,8 +172,12 @@ export const PdfDebugModal: React.FC<PdfDebugModalProps> = ({
         const deltaW = Math.round((e.clientX - resizeStartRef.current.clientX) / zoomScale);
         const deltaH = Math.round((e.clientY - resizeStartRef.current.clientY) / zoomScale);
 
-        const newW = Math.max(6, Math.min(550, resizeStartRef.current.initialW + deltaW));
-        const newH = Math.max(6, Math.min(500, resizeStartRef.current.initialH + deltaH));
+        const newW = resizeDirection === 'height'
+          ? (currentBox.w || resizeStartRef.current.initialW)
+          : Math.max(6, Math.min(550, resizeStartRef.current.initialW + deltaW));
+        const newH = resizeDirection === 'width'
+          ? (currentBox.h || resizeStartRef.current.initialH)
+          : Math.max(6, Math.min(500, resizeStartRef.current.initialH + deltaH));
 
         setCustomCoords(prev => ({
           ...prev,
@@ -233,7 +238,7 @@ export const PdfDebugModal: React.FC<PdfDebugModalProps> = ({
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [draggingField, resizingField, activeDoc, zoomScale, customCoords]);
+  }, [draggingField, resizingField, resizeDirection, activeDoc, zoomScale, customCoords]);
 
   if (!isOpen) return null;
 
@@ -1084,25 +1089,151 @@ export const PdfDebugModal: React.FC<PdfDebugModalProps> = ({
                       )}
                     </div>
 
-                    {/* Bottom-Right Corner Resize Handle in Edit Mode */}
+                    {/* On-Box Direct Controls in Edit Mode when Selected */}
                     {viewMode === 'edit' && isSelected && (
-                      <div
-                        onMouseDown={(e) => {
-                          e.stopPropagation();
-                          if (e.button !== 0) return;
-                          setResizingField(key);
-                          resizeStartRef.current = {
-                            clientX: e.clientX,
-                            clientY: e.clientY,
-                            initialW: boxW,
-                            initialH: boxH
-                          };
-                        }}
-                        className="absolute -bottom-1 -right-1 w-3 h-3 bg-blue-600 border border-white rounded-full cursor-se-resize shadow-md hover:scale-125 transition-transform z-50 flex items-center justify-center"
-                        title="모서리를 드래그하여 가로/세로 크기 조절"
-                      >
-                        <div className="w-1 h-1 bg-white rounded-full pointer-events-none" />
-                      </div>
+                      <>
+                        {/* Floating Quick Size Adjuster Pill */}
+                        <div 
+                          onClick={(e) => e.stopPropagation()}
+                          className="absolute -top-10 left-0 flex items-center gap-1 bg-slate-950/95 border border-blue-500/60 shadow-2xl rounded-lg px-2 py-1 text-[10px] text-white z-[60] whitespace-nowrap pointer-events-auto backdrop-blur-md"
+                        >
+                          {/* Horizontal Width Quick Controls */}
+                          <div className="flex items-center gap-0.5 border-r border-slate-700 pr-1.5">
+                            <span className="font-bold text-cyan-300 mr-0.5">가로:</span>
+                            <button
+                              type="button"
+                              onClick={() => updateCoord(key, 'w', -10)}
+                              className="px-1 py-0.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[9px] font-bold text-slate-300"
+                              title="가로 -10px"
+                            >
+                              -10
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => updateCoord(key, 'w', -2)}
+                              className="px-1 py-0.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[9px] font-bold text-slate-300"
+                              title="가로 -2px"
+                            >
+                              -2
+                            </button>
+                            <span className="font-mono text-emerald-300 font-bold px-1">{boxW}px</span>
+                            <button
+                              type="button"
+                              onClick={() => updateCoord(key, 'w', 2)}
+                              className="px-1 py-0.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[9px] font-bold text-slate-300"
+                              title="가로 +2px"
+                            >
+                              +2
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => updateCoord(key, 'w', 10)}
+                              className="px-1 py-0.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[9px] font-bold text-slate-300"
+                              title="가로 +10px"
+                            >
+                              +10
+                            </button>
+                          </div>
+
+                          {/* Vertical Height Quick Controls */}
+                          <div className="flex items-center gap-0.5 pl-0.5">
+                            <span className="font-bold text-amber-300 mr-0.5">세로:</span>
+                            <button
+                              type="button"
+                              onClick={() => updateCoord(key, 'h', -10)}
+                              className="px-1 py-0.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[9px] font-bold text-slate-300"
+                              title="세로 -10px"
+                            >
+                              -10
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => updateCoord(key, 'h', -2)}
+                              className="px-1 py-0.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[9px] font-bold text-slate-300"
+                              title="세로 -2px"
+                            >
+                              -2
+                            </button>
+                            <span className="font-mono text-emerald-300 font-bold px-1">{boxH}px</span>
+                            <button
+                              type="button"
+                              onClick={() => updateCoord(key, 'h', 2)}
+                              className="px-1 py-0.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[9px] font-bold text-slate-300"
+                              title="세로 +2px"
+                            >
+                              +2
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => updateCoord(key, 'h', 10)}
+                              className="px-1 py-0.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[9px] font-bold text-slate-300"
+                              title="세로 +10px"
+                            >
+                              +10
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Right-Edge Handle (가로 너비 전용 조절) */}
+                        <div
+                          onMouseDown={(e) => {
+                            e.stopPropagation();
+                            if (e.button !== 0) return;
+                            setResizingField(key);
+                            setResizeDirection('width');
+                            resizeStartRef.current = {
+                              clientX: e.clientX,
+                              clientY: e.clientY,
+                              initialW: boxW,
+                              initialH: boxH
+                            };
+                          }}
+                          className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-2 h-5 bg-cyan-500 border border-white rounded cursor-ew-resize shadow-md hover:scale-125 transition-transform z-50 flex items-center justify-center"
+                          title="오른쪽 모서리를 좌우로 드래그: 가로 너비만 조절"
+                        >
+                          <div className="w-0.5 h-2.5 bg-white rounded-full pointer-events-none" />
+                        </div>
+
+                        {/* Bottom-Edge Handle (세로 높이 전용 조절) */}
+                        <div
+                          onMouseDown={(e) => {
+                            e.stopPropagation();
+                            if (e.button !== 0) return;
+                            setResizingField(key);
+                            setResizeDirection('height');
+                            resizeStartRef.current = {
+                              clientX: e.clientX,
+                              clientY: e.clientY,
+                              initialW: boxW,
+                              initialH: boxH
+                            };
+                          }}
+                          className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-5 h-2 bg-amber-500 border border-white rounded cursor-ns-resize shadow-md hover:scale-125 transition-transform z-50 flex items-center justify-center"
+                          title="아래쪽 모서리를 위아래로 드래그: 세로 높이만 조절"
+                        >
+                          <div className="w-2.5 h-0.5 bg-white rounded-full pointer-events-none" />
+                        </div>
+
+                        {/* Bottom-Right Corner Handle (가로/세로 동시 조절) */}
+                        <div
+                          onMouseDown={(e) => {
+                            e.stopPropagation();
+                            if (e.button !== 0) return;
+                            setResizingField(key);
+                            setResizeDirection('both');
+                            resizeStartRef.current = {
+                              clientX: e.clientX,
+                              clientY: e.clientY,
+                              initialW: boxW,
+                              initialH: boxH
+                            };
+                          }}
+                          className="absolute -bottom-1.5 -right-1.5 w-3.5 h-3.5 bg-blue-600 border border-white rounded-full cursor-nwse-resize shadow-md hover:scale-125 transition-transform z-50 flex items-center justify-center"
+                          title="대각선 드래그: 가로 너비와 세로 높이 동시 조절"
+                        >
+                          <div className="w-1 h-1 bg-white rounded-full pointer-events-none" />
+                        </div>
+                      </>
                     )}
                   </div>
                 );
@@ -1139,29 +1270,271 @@ export const PdfDebugModal: React.FC<PdfDebugModalProps> = ({
 
             {/* Case A: Item is Selected -> Simple Intuitive Controls */}
             {selectedField && selectedPos ? (
-              <div className="p-4 border-b border-slate-800 bg-slate-800/40 space-y-4">
+              <div className="flex-1 overflow-y-auto min-h-0 p-3.5 sm:p-4 space-y-4">
                 
-                {/* Title & Type Badge */}
-                <div className="flex items-start justify-between gap-2">
-                  <div>
+                {/* Title & Type Badge & Delete */}
+                <div className="flex items-start justify-between gap-2 pb-2 border-b border-slate-800">
+                  <div className="min-w-0">
                     <span className="text-[10px] px-2 py-0.5 rounded-md font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
                       {selectedPos.type === 'check' ? '체크박스 [✓]' : '텍스트 필드'}
                     </span>
-                    <h4 className="text-sm font-extrabold text-white mt-1.5">
+                    <h4 className="text-sm font-extrabold text-white mt-1.5 truncate">
                       {getFieldFriendlyName(selectedField)}
                     </h4>
+                    <span className="text-[10px] text-slate-500 font-mono">
+                      키: {selectedField}
+                    </span>
                   </div>
                   <button
                     onClick={() => deleteCoordField(selectedField)}
-                    className="p-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded-lg border border-rose-500/20 transition cursor-pointer"
+                    className="p-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded-lg border border-rose-500/20 transition cursor-pointer shrink-0"
                     title="이 항목 삭제"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
+                {/* Box Size Control: 가로 너비 & 세로 높이 (Prominently Placed at Top) */}
+                <div className="space-y-3 bg-slate-950/80 p-3 rounded-2xl border border-blue-500/30 shadow-inner">
+                  <div className="flex items-center justify-between text-xs pb-1 border-b border-slate-800/80">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                      <span className="font-extrabold text-white">박스 크기 조절 (가로·세로)</span>
+                    </div>
+                    <span className="text-[10px] text-cyan-300 font-mono font-bold bg-blue-950/60 px-2 py-0.5 rounded border border-blue-500/30">
+                      W: {selectedPos.w || (selectedPos.type === 'check' ? 14 : 20)}px · H: {selectedPos.h || (selectedPos.type === 'check' ? 14 : 14)}px
+                    </span>
+                  </div>
+
+                  {/* 1. Horizontal Width Adjustment (가로 너비 조절) */}
+                  <div className="space-y-1.5 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-bold text-cyan-300 flex items-center gap-1">
+                        ↔ 박스 가로 너비 (Width):
+                      </span>
+                      <div className="flex items-center gap-1 font-mono text-xs">
+                        <input
+                          type="number"
+                          min="4"
+                          max="550"
+                          value={selectedPos.w || (selectedPos.type === 'check' ? 14 : 20)}
+                          onChange={(e) => {
+                            const val = parseInt(e.target.value, 10);
+                            if (!isNaN(val)) setCoordValue(selectedField, 'w', val);
+                          }}
+                          className="w-16 px-1.5 py-0.5 bg-slate-950 border border-cyan-500/50 rounded text-center text-cyan-300 font-bold focus:outline-none focus:border-cyan-400"
+                        />
+                        <span className="text-slate-400 text-[10px]">px</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between gap-1 pt-1">
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => updateCoord(selectedField, 'w', -10)}
+                          className="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
+                          title="가로 너비 10px 줄이기 (좁게)"
+                        >
+                          -10
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateCoord(selectedField, 'w', -2)}
+                          className="px-1.5 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
+                          title="가로 너비 2px 줄이기 (좁게)"
+                        >
+                          -2
+                        </button>
+                      </div>
+                      <span className="text-[10px] text-slate-400 font-medium">좁게 ↔ 넓게</span>
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => updateCoord(selectedField, 'w', 2)}
+                          className="px-1.5 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
+                          title="가로 너비 2px 늘리기 (넓게)"
+                        >
+                          +2
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateCoord(selectedField, 'w', 10)}
+                          className="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
+                          title="가로 너비 10px 늘리기 (넓게)"
+                        >
+                          +10
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2. Vertical Height Adjustment (세로 높이 조절) */}
+                  <div className="space-y-1.5 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-bold text-amber-300 flex items-center gap-1">
+                        ↕ 박스 세로 높이 (Height):
+                      </span>
+                      <div className="flex items-center gap-1 font-mono text-xs">
+                        <input
+                          type="number"
+                          min="4"
+                          max="500"
+                          value={selectedPos.h || (selectedPos.type === 'check' ? 14 : 14)}
+                          onChange={(e) => {
+                            const val = parseInt(e.target.value, 10);
+                            if (!isNaN(val)) setCoordValue(selectedField, 'h', val);
+                          }}
+                          className="w-16 px-1.5 py-0.5 bg-slate-950 border border-amber-500/50 rounded text-center text-amber-300 font-bold focus:outline-none focus:border-amber-400"
+                        />
+                        <span className="text-slate-400 text-[10px]">px</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between gap-1 pt-1">
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => updateCoord(selectedField, 'h', -10)}
+                          className="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
+                          title="세로 높이 10px 줄이기 (낮게)"
+                        >
+                          -10
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateCoord(selectedField, 'h', -2)}
+                          className="px-1.5 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
+                          title="세로 높이 2px 줄이기 (낮게)"
+                        >
+                          -2
+                        </button>
+                      </div>
+                      <span className="text-[10px] text-slate-400 font-medium">낮게 ↕ 높게</span>
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => updateCoord(selectedField, 'h', 2)}
+                          className="px-1.5 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
+                          title="세로 높이 2px 늘리기 (높게)"
+                        >
+                          +2
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateCoord(selectedField, 'h', 10)}
+                          className="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
+                          title="세로 높이 10px 늘리기 (높게)"
+                        >
+                          +10
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Direction Pad (Arrows for easy position tuning) */}
+                <div className="space-y-2 bg-slate-950/60 p-3 rounded-2xl border border-slate-800">
+                  <div className="flex items-center justify-between text-xs pb-1 border-b border-slate-800/80">
+                    <span className="font-bold text-slate-300">위치 미세 조정:</span>
+                    <div className="flex items-center gap-1 bg-slate-900 p-0.5 rounded-lg border border-slate-800 text-[10px]">
+                      <button
+                        type="button"
+                        onClick={() => setMoveStep(1)}
+                        className={`px-1.5 py-0.5 rounded font-bold ${moveStep === 1 ? 'bg-blue-600 text-white' : 'text-slate-400'}`}
+                      >
+                        1px씩
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setMoveStep(5)}
+                        className={`px-1.5 py-0.5 rounded font-bold ${moveStep === 5 ? 'bg-blue-600 text-white' : 'text-slate-400'}`}
+                      >
+                        5px씩
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setMoveStep(10)}
+                        className={`px-1.5 py-0.5 rounded font-bold ${moveStep === 10 ? 'bg-blue-600 text-white' : 'text-slate-400'}`}
+                      >
+                        10px씩
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Directional Pad Grid */}
+                  <div className="flex flex-col items-center gap-1 py-1">
+                    <button
+                      type="button"
+                      onClick={() => updateCoord(selectedField, 'y', moveStep)}
+                      className="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1 border border-slate-700 transition cursor-pointer"
+                    >
+                      <ArrowUp className="w-3.5 h-3.5 text-blue-400" />
+                      <span>위로 (Y+)</span>
+                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => updateCoord(selectedField, 'x', -moveStep)}
+                        className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1 border border-slate-700 transition cursor-pointer"
+                      >
+                        <ArrowLeft className="w-3.5 h-3.5 text-blue-400" />
+                        <span>왼쪽 (X-)</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => updateCoord(selectedField, 'x', moveStep)}
+                        className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1 border border-slate-700 transition cursor-pointer"
+                      >
+                        <span>오른쪽 (X+)</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-blue-400" />
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => updateCoord(selectedField, 'y', -moveStep)}
+                      className="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1 border border-slate-700 transition cursor-pointer"
+                    >
+                      <ArrowDown className="w-3.5 h-3.5 text-blue-400" />
+                      <span>아래로 (Y-)</span>
+                    </button>
+                  </div>
+
+                  {/* Exact X / Y Inputs */}
+                  <div className="grid grid-cols-2 gap-2 pt-1 border-t border-slate-800/60">
+                    <div className="flex items-center justify-between text-xs bg-slate-900 px-2 py-1 rounded-lg border border-slate-800">
+                      <span className="text-[10px] text-slate-400 font-mono">X 좌표:</span>
+                      <div className="flex items-center gap-1">
+                        <input
+                          type="number"
+                          value={selectedPos.x || 0}
+                          onChange={(e) => {
+                            const val = parseInt(e.target.value, 10);
+                            if (!isNaN(val)) setCoordValue(selectedField, 'x', val);
+                          }}
+                          className="w-12 px-1 py-0.5 bg-slate-950 border border-slate-700 rounded text-center text-xs text-white font-mono font-bold"
+                        />
+                        <span className="text-[10px] text-slate-500">px</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between text-xs bg-slate-900 px-2 py-1 rounded-lg border border-slate-800">
+                      <span className="text-[10px] text-slate-400 font-mono">Y 좌표:</span>
+                      <div className="flex items-center gap-1">
+                        <input
+                          type="number"
+                          value={selectedPos.y || 0}
+                          onChange={(e) => {
+                            const val = parseInt(e.target.value, 10);
+                            if (!isNaN(val)) setCoordValue(selectedField, 'y', val);
+                          }}
+                          className="w-12 px-1 py-0.5 bg-slate-950 border border-slate-700 rounded text-center text-xs text-white font-mono font-bold"
+                        />
+                        <span className="text-[10px] text-slate-500">px</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Live Value Preview Box & Direct Key-in Editor */}
-                <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs space-y-2">
+                <div className="p-3 rounded-2xl bg-slate-950/70 border border-slate-800 text-xs space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] text-slate-400 font-bold">표시 내용 / 값 직접 키인:</span>
                     <span className="text-[10px] text-blue-400 font-medium">수정 즉시 반영</span>
@@ -1191,195 +1564,13 @@ export const PdfDebugModal: React.FC<PdfDebugModalProps> = ({
                   )}
                 </div>
 
-                {/* Direction Pad (Arrows for easy position tuning) */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-slate-300">위치 미세 조정:</span>
-                    <div className="flex items-center gap-1 bg-slate-950 p-0.5 rounded-lg border border-slate-800 text-[10px]">
-                      <button
-                        onClick={() => setMoveStep(1)}
-                        className={`px-1.5 py-0.5 rounded font-bold ${moveStep === 1 ? 'bg-blue-600 text-white' : 'text-slate-400'}`}
-                      >
-                        1px씩
-                      </button>
-                      <button
-                        onClick={() => setMoveStep(5)}
-                        className={`px-1.5 py-0.5 rounded font-bold ${moveStep === 5 ? 'bg-blue-600 text-white' : 'text-slate-400'}`}
-                      >
-                        5px씩
-                      </button>
-                      <button
-                        onClick={() => setMoveStep(10)}
-                        className={`px-1.5 py-0.5 rounded font-bold ${moveStep === 10 ? 'bg-blue-600 text-white' : 'text-slate-400'}`}
-                      >
-                        10px씩
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Directional Pad Grid */}
-                  <div className="flex flex-col items-center gap-1 py-1">
-                    <button
-                      onClick={() => updateCoord(selectedField, 'y', moveStep)}
-                      className="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1 border border-slate-700 transition cursor-pointer"
-                    >
-                      <ArrowUp className="w-3.5 h-3.5 text-blue-400" />
-                      <span>위로</span>
-                    </button>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => updateCoord(selectedField, 'x', -moveStep)}
-                        className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1 border border-slate-700 transition cursor-pointer"
-                      >
-                        <ArrowLeft className="w-3.5 h-3.5 text-blue-400" />
-                        <span>왼쪽</span>
-                      </button>
-                      <button
-                        onClick={() => updateCoord(selectedField, 'x', moveStep)}
-                        className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1 border border-slate-700 transition cursor-pointer"
-                      >
-                        <span>오른쪽</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-blue-400" />
-                      </button>
-                    </div>
-                    <button
-                      onClick={() => updateCoord(selectedField, 'y', -moveStep)}
-                      className="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1 border border-slate-700 transition cursor-pointer"
-                    >
-                      <ArrowDown className="w-3.5 h-3.5 text-blue-400" />
-                      <span>아래로</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Box Size Control: 가로 너비 & 세로 높이 */}
-                <div className="pt-2.5 border-t border-slate-800/80 space-y-2.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-slate-300">박스 크기 조절:</span>
-                    <span className="text-[10px] text-slate-400 font-mono">
-                      W: {selectedPos.w || (selectedPos.type === 'check' ? 14 : 20)}px · H: {selectedPos.h || (selectedPos.type === 'check' ? 14 : 14)}px
-                    </span>
-                  </div>
-
-                  {/* Horizontal Width Adjustment (가로 너비 조절) */}
-                  <div className="space-y-1 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-slate-300">박스 가로 너비:</span>
-                      <div className="flex items-center gap-1 font-mono text-xs">
-                        <input
-                          type="number"
-                          min="4"
-                          max="550"
-                          value={selectedPos.w || (selectedPos.type === 'check' ? 14 : 20)}
-                          onChange={(e) => {
-                            const val = parseInt(e.target.value, 10);
-                            if (!isNaN(val)) setCoordValue(selectedField, 'w', val);
-                          }}
-                          className="w-14 px-1.5 py-0.5 bg-slate-900 border border-slate-700 rounded text-center text-emerald-300 font-bold focus:outline-none focus:border-blue-500"
-                        />
-                        <span className="text-slate-500 text-[10px]">px</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between gap-1 pt-1">
-                      <div className="flex items-center gap-1">
-                        <button
-                          onClick={() => updateCoord(selectedField, 'w', -10)}
-                          className="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
-                          title="가로 너비 10px 줄이기 (좁게)"
-                        >
-                          -10
-                        </button>
-                        <button
-                          onClick={() => updateCoord(selectedField, 'w', -2)}
-                          className="px-1.5 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
-                          title="가로 너비 2px 줄이기 (좁게)"
-                        >
-                          -2
-                        </button>
-                      </div>
-                      <span className="text-[10px] text-slate-400 font-medium">좁게 ↔ 넓게</span>
-                      <div className="flex items-center gap-1">
-                        <button
-                          onClick={() => updateCoord(selectedField, 'w', 2)}
-                          className="px-1.5 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
-                          title="가로 너비 2px 늘리기 (넓게)"
-                        >
-                          +2
-                        </button>
-                        <button
-                          onClick={() => updateCoord(selectedField, 'w', 10)}
-                          className="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
-                          title="가로 너비 10px 늘리기 (넓게)"
-                        >
-                          +10
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Vertical Height Adjustment (세로 높이 조절) */}
-                  <div className="space-y-1 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-slate-300">박스 세로 높이:</span>
-                      <div className="flex items-center gap-1 font-mono text-xs">
-                        <input
-                          type="number"
-                          min="4"
-                          max="500"
-                          value={selectedPos.h || (selectedPos.type === 'check' ? 14 : 14)}
-                          onChange={(e) => {
-                            const val = parseInt(e.target.value, 10);
-                            if (!isNaN(val)) setCoordValue(selectedField, 'h', val);
-                          }}
-                          className="w-14 px-1.5 py-0.5 bg-slate-900 border border-slate-700 rounded text-center text-emerald-300 font-bold focus:outline-none focus:border-blue-500"
-                        />
-                        <span className="text-slate-500 text-[10px]">px</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between gap-1 pt-1">
-                      <div className="flex items-center gap-1">
-                        <button
-                          onClick={() => updateCoord(selectedField, 'h', -5)}
-                          className="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
-                          title="세로 높이 5px 낮추기 (낮게)"
-                        >
-                          -5
-                        </button>
-                        <button
-                          onClick={() => updateCoord(selectedField, 'h', -1)}
-                          className="px-1.5 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
-                          title="세로 높이 1px 낮추기 (낮게)"
-                        >
-                          -1
-                        </button>
-                      </div>
-                      <span className="text-[10px] text-slate-400 font-medium">낮게 ↕ 높게</span>
-                      <div className="flex items-center gap-1">
-                        <button
-                          onClick={() => updateCoord(selectedField, 'h', 1)}
-                          className="px-1.5 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
-                          title="세로 높이 1px 높이기 (높게)"
-                        >
-                          +1
-                        </button>
-                        <button
-                          onClick={() => updateCoord(selectedField, 'h', 5)}
-                          className="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 hover:text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer transition"
-                          title="세로 높이 5px 높이기 (높게)"
-                        >
-                          +5
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Deselect button */}
                 <button
+                  type="button"
                   onClick={() => setSelectedField(null)}
-                  className="w-full py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-xl text-xs font-bold transition cursor-pointer"
+                  className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-bold transition cursor-pointer border border-slate-700"
                 >
-                  선택 해제 (목록으로 돌아가기)
+                  선택 해제 (전체 항목 목록으로 돌아가기)
                 </button>
               </div>
             ) : null}

@@ -577,13 +577,273 @@ export interface RequiredDoc {
 }
 
 export const docMatrix: Record<string, Record<string, RequiredDoc[]>> = {
-  'E-9': {
+  'E-7-4R': {
+    'chk_change_status': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '<붙임 1> 지자체 추천 신청서 (E-7-4R 전남도·영암군)', en: 'Regional Recommendation Application (Form 1)', vn: 'Đơn xin giới thiệu của địa phương (Mẫu 1)', ne: 'स्थानीय सिफारिस आवेदन (फारम १)' }, type: 'auto' },
+      { name: { kr: '<붙임 2-1> 점수제 자체 심사표 [지역특화형]', en: 'Points System Self-Evaluation (Form 2-1)', vn: 'Bảng tự đánh giá theo thang điểm (Mẫu 2-1)', ne: 'अंक प्रणाली स्व-मूल्यांकन (फारम २-१)' }, type: 'auto' },
+      { name: { kr: '<붙임 3-1> 외국인 신상 기술서 [지역특화형]', en: 'Foreigner Personal Statement (Form 3-1)', vn: 'Bản khai thông tin cá nhân người nước ngoài (Mẫu 3-1)', ne: 'विदेशी व्यक्तिगत विवरण (फारम ३-१)' }, type: 'auto' },
+      { name: { kr: '[붙임] 고용기업 추천서 [지역특화형]', en: 'Employer Recommendation Letter', vn: 'Thư giới thiệu của doanh nghiệp tuyển dụng', ne: 'रोजगारदाता कम्पनीको सिफारिस पत्र' }, type: 'auto' },
+      { name: { kr: '표준근로계약서 사본 (2년 이상 계약, 연 2,600만원 이상)', en: 'Standard Employment Contract (2+ yrs, 26M+ KRW)', vn: 'Hợp đồng lao động tiêu chuẩn (trên 2 năm, từ 26 triệu KRW)', ne: 'मानक रोजगार सम्झौता (२ वर्षभन्दा बढी, २६० लाख वोन)' }, type: 'auto' },
+      { name: { kr: '재직(경력) 증명서 (1년 이상 정상 근무 입증)', en: 'Certificate of Employment (1+ yr in current firm)', vn: 'Giấy chứng nhận công tác (trên 1 năm)', ne: 'रोजगार प्रमाणपत्र (१ वर्षभन्दा बढी)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서 및 임대차계약서', en: 'Document evidencing place of stay / Lease agreement', vn: 'Giấy xác nhận nơi cư trú & Hợp đồng thuê nhà', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात र भाडा सम्झौता' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호, 보증기간 2년)', en: 'Letter of Guarantee (2 years)', vn: 'Giấy bảo lãnh (Thời hạn 2 năm)', ne: 'ग्यारेन्टी फारम (२ वर्षको अवधि)' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증 원본·사본', en: 'Passport and Alien Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký người nước ngoài', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '최근 2년간 소득금액증명원 (홈택스 발급)', en: 'Proof of Income Amount for Last 2 Years (Hometax)', vn: 'Chứng minh thu nhập 2 năm gần nhất (Hometax)', ne: 'पछिल्लो २ वर्षको आय प्रमाण (Hometax)' }, type: 'personal' },
+      { name: { kr: '한국어능력 입증서류 (사회통합프로그램 2단계 이수증 또는 TOPIK)', en: 'Korean Proficiency Proof (KIIP Stage 2+ or TOPIK)', vn: 'Chứng chỉ tiếng Hàn (KIIP từ giai đoạn 2 hoặc TOPIK)', ne: 'कोरियाली भाषा प्रवीणता प्रमाण (KIIP वा TOPIK)' }, type: 'personal' },
+      { name: { kr: '최종학력증명서 (본국 고등학교 또는 대학교 졸업증명서)', en: 'Proof of Highest Education (Diploma/Degree)', vn: 'Bằng tốt nghiệp cao nhất', ne: 'उच्चतम शैक्षिक योग्यताको प्रमाण' }, type: 'personal' },
+      { name: { kr: '사업자 등록증 사본', en: 'Copy of Business Registration License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ताको प्रतिलिपि' }, type: 'company' },
+      { name: { kr: '사업장 국세 및 지방세 완납증명서', en: 'Tax Payment Certificates (National & Local Taxes)', vn: 'Chứng nhận hoàn thành nghĩa vụ thuế (Quốc gia & Địa phương)', ne: 'कर भुक्तानी प्रमाणपत्रहरू (राष्ट्रिय र स्थानीय)' }, type: 'company' },
+      { name: { kr: '4대보험 사업장 가입자 명부 (내외국인 총원 확인용)', en: '4-Major Social Insurance Workplace Member List', vn: 'Danh sách tham gia 4 bảo hiểm bắt buộc', ne: '४ प्रमुख सामाजिक बीमा सदस्य सूची' }, type: 'company' }
+    ],
+    'chk_extension': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee (Template #129)', vn: 'Giấy bảo lãnh (Mẫu số 129)', ne: 'ग्यारेन्टी फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '표준근로계약서 사본 (연장 갱신 계약)', en: 'Standard Employment Contract (Renewal)', vn: 'Hợp đồng lao động tiêu chuẩn (Gia hạn)', ne: 'मानक रोजगार सम्झौता (नवीकरण)' }, type: 'auto' },
+      { name: { kr: '재직증명서', en: 'Certificate of Employment', vn: 'Giấy chứng nhận đang làm việc', ne: 'रोजगार प्रमाणपत्र' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký người nước ngoài', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '전년도 소득금액증명원 (홈택스 발급)', en: 'Proof of Personal Income (Hometax)', vn: 'Chứng minh thu nhập năm trước (Hometax)', ne: 'अघिल्लो वर्षको आय प्रमाण (Hometax)' }, type: 'personal' },
+      { name: { kr: '개인 지방세·국세 납세증명서', en: 'Personal Tax Certificates', vn: 'Giấy nộp thuế cá nhân', ne: 'व्यक्तिगत कर प्रमाणपत्र' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ताको प्रतिलिपि' }, type: 'company' },
+      { name: { kr: '사업장 납세증명서 (국세/지방세 완납)', en: 'Company Tax Certificates (National/Local)', vn: 'Chứng nhận nộp thuế công ty', ne: 'कम्पनी कर प्रमाणपत्रहरू' }, type: 'company' },
+      { name: { kr: '4대보험 사업장 가입자 명부', en: '4-Major Social Insurance Workplace List', vn: 'Danh sách tham gia 4 bảo hiểm', ne: '४ प्रमुख बीमा सूची' }, type: 'company' }
+    ],
+    'chk_change_work': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '신규 고용기업 추천서 및 지자체 추천서', en: 'New Employer & Local Recommendation', vn: 'Thư giới thiệu doanh nghiệp mới', ne: 'नयाँ कम्पनी सिफारिस' }, type: 'auto' },
+      { name: { kr: '신규 표준근로계약서 사본', en: 'New Standard Employment Contract', vn: 'Hợp đồng lao động mới', ne: 'नयाँ रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '원 근무처 이적동의서 (또는 폐업 등 입증서류)', en: 'Transfer Consent from Previous Employer', vn: 'Đồng ý chuyển nơi làm việc từ chủ cũ', ne: 'अघिल्लो कम्पनीबाट स्थानान्तरण सहमति' }, type: 'personal' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký người nước ngoài', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '신규 사업장 사업자등록증 및 납세증명서', en: 'New Business License & Tax Certificates', vn: 'Giấy phép kinh doanh mới', ne: 'नयाँ व्यवसाय दर्ता' }, type: 'company' }
+    ],
+    'chk_alien_reg': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '여권 원본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매 (3.5cm x 4.5cm)', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता प्रतिलिपि' }, type: 'company' }
+    ],
+    'chk_reissue': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 원본 및 사본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '분실/훼손 사유서', en: 'Statement of Reason (Lost/Damaged)', vn: 'Lý do mất hoặc hỏng thẻ', ne: 'हराएको/क्षतिग्रस्त कारण फारम' }, type: 'personal' }
+    ],
+    'chk_reentry': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Alien Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी कार्ड' }, type: 'personal' }
+    ],
+    'default': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký người nước ngoài', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' }
+    ]
+  },
+  'E-7-3': {
+    'chk_extension': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee', vn: 'Giấy bảo lãnh', ne: 'ग्यारेन्टी फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '표준근로계약서 사본', en: 'Standard Employment Contract', vn: 'Hợp đồng lao động tiêu chuẩn', ne: 'मानक रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '재직증명서', en: 'Certificate of Employment', vn: 'Giấy chứng nhận công tác', ne: 'रोजगार प्रमाणपत्र' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký người nước ngoài', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '소득금액증명원 (홈택스 발급)', en: 'Proof of Personal Income (Hometax)', vn: 'Chứng minh thu nhập cá nhân (Hometax)', ne: 'आय प्रमाण (Hometax)' }, type: 'personal' },
+      { name: { kr: '조선업 기량검증확인서 또는 자격증 사본', en: 'Skills Verification / Qualification Certificate', vn: 'Giấy xác nhận kỹ năng ngành đóng tàu', ne: 'दक्षता प्रमाणीकरण' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ताको प्रतिलिपि' }, type: 'company' },
+      { name: { kr: '사업장 국세 및 지방세 납세증명서', en: 'Company Tax Certificates', vn: 'Chứng nhận nộp thuế công ty', ne: 'कम्पनी कर प्रमाणपत्रहरू' }, type: 'company' },
+      { name: { kr: '조선소 원청 출입증 또는 사내협력사 입증서류', en: 'Shipyard Access Pass / Subcontractor Proof', vn: 'Giấy xác nhận nhà thầu đóng tàu', ne: 'जहाज निर्माण कम्पनी प्रमाण' }, type: 'company' }
+    ],
+    'chk_change_status': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee', vn: 'Giấy bảo lãnh', ne: 'ग्यारेन्티 फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '조선업 표준근로계약서 사본', en: 'Shipyard Employment Contract', vn: 'Hợp đồng lao động ngành đóng tàu', ne: 'जहाज निर्माण रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '기량검증 통과 확인서 (용접/도장/배관)', en: 'Skill Test Certificate (Welding/Coating/Piping)', vn: 'Giấy chứng nhận kiểm tra tay nghề', ne: 'दक्षता परीक्षण प्रमाणपत्र' }, type: 'personal' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '산업통상자원부 고용추천서', en: 'MOTIE Employment Recommendation', vn: 'Thư giới thiệu việc làm của MOTIE', ne: 'MOTIE रोजगार सिफारिस' }, type: 'company' },
+      { name: { kr: '사업자등록증 및 납세증명서', en: 'Business License and Tax Certificates', vn: 'Giấy phép kinh doanh và Chứng nhận thuế', ne: 'व्यवसाय दर्ता र कर प्रमाणपत्र' }, type: 'company' }
+    ],
+    'chk_change_work': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee', vn: 'Giấy bảo lãnh', ne: 'ग्यारेन्टी फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '새로운 근로계약서 사본', en: 'New Employment Contract', vn: 'Hợp đồng lao động mới', ne: 'नयाँ रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '이적동의서 (원 고용주)', en: 'Transfer Consent', vn: 'Đồng ý chuyển nơi làm việc', ne: 'स्थानान्तरण सहमति' }, type: 'personal' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी कार्ड' }, type: 'personal' },
+      { name: { kr: '새로운 사업장 사업자등록증', en: 'New Business License', vn: 'Giấy phép kinh doanh mới', ne: 'नयाँ व्यवसाय दर्ता' }, type: 'company' }
+    ],
     'chk_alien_reg': [
       { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
       { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
       { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
       { name: { kr: '여권 원본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
       { name: { kr: '표준규격사진 1매', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' }
+    ],
+    'chk_reissue': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 원본 및 사본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '분실/훼손 사유서', en: 'Statement of Reason (Lost/Damaged)', vn: 'Lý do mất hoặc hỏng thẻ', ne: 'हराएको/क्षतिग्रस्त कारण फारम' }, type: 'personal' }
+    ],
+    'chk_reentry': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Alien Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी कार्ड' }, type: 'personal' }
+    ],
+    'default': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' }
+    ]
+  },
+  'E-7-4': {
+    'chk_change_status': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '숙련기능인력 점수제 심사표', en: 'K-Point Points Evaluation Sheet', vn: 'Bảng đánh giá thang điểm K-Point', ne: 'K-Point अंक मूल्याङ्कन फारम' }, type: 'auto' },
+      { name: { kr: '고용기업 추천서', en: 'Employer Recommendation Letter', vn: 'Thư giới thiệu của doanh nghiệp', ne: 'रोजगारदाता सिफारिस' }, type: 'auto' },
+      { name: { kr: '표준근로계약서 사본 (2년 이상)', en: 'Standard Employment Contract (2+ yrs)', vn: 'Hợp đồng lao động tiêu chuẩn (trên 2 năm)', ne: 'मानक रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '재직증명서', en: 'Certificate of Employment', vn: 'Giấy chứng nhận công tác', ne: 'रोजगार प्रमाणपत्र' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee', vn: 'Giấy bảo lãnh', ne: 'ग्यारेन्टी फारम' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '소득금액증명원 (최근 2개년)', en: 'Proof of Income for Last 2 Years', vn: 'Chứng minh thu nhập 2 năm gần nhất', ne: 'पछिल्लो २ वर्षको आय प्रमाण' }, type: 'personal' },
+      { name: { kr: '한국어능력 입증서류 (KIIP 또는 TOPIK)', en: 'Korean Proficiency Proof', vn: 'Chứng chỉ tiếng Hàn', ne: 'कोरियाली भाषा प्रमाण' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' },
+      { name: { kr: '국세 및 지방세 완납증명서', en: 'National & Local Tax Certificates', vn: 'Chứng nhận nộp thuế công ty', ne: 'कम्पनी कर प्रमाणपत्रहरू' }, type: 'company' },
+      { name: { kr: '4대보험 사업장 가입자 명부', en: '4-Major Insurance Member List', vn: 'Danh sách 4 bảo hiểm', ne: '४ प्रमुख बीमा सदस्य सूची' }, type: 'company' }
+    ],
+    'chk_extension': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee', vn: 'Giấy bảo lãnh', ne: 'ग्यारेन्टी फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '표준근로계약서 사본', en: 'Employment Contract', vn: 'Hợp đồng lao động', ne: 'रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '재직증명서', en: 'Certificate of Employment', vn: 'Giấy chứng nhận công tác', ne: 'रोजगार प्रमाणपत्र' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '전년도 소득금액증명원 (홈택스 발급)', en: 'Proof of Personal Income (Hometax)', vn: 'Chứng minh thu nhập năm trước', ne: 'अघिल्लो वर्षको आय प्रमाण' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' },
+      { name: { kr: '사업장 납세증명서 (국세/지방세 완납)', en: 'Company Tax Certificates', vn: 'Chứng nhận nộp thuế công ty', ne: 'कम्पनी कर प्रमाणपत्रहरू' }, type: 'company' },
+      { name: { kr: '4대보험 사업장 가입자 명부', en: '4-Major Insurance List', vn: 'Danh sách 4 bảo hiểm', ne: '४ प्रमुख बीमा सूची' }, type: 'company' }
+    ],
+    'chk_change_work': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee', vn: 'Giấy bảo lãnh', ne: 'ग्यारेन्टी फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '새로운 표준근로계약서 사본', en: 'New Employment Contract', vn: 'Hợp đồng lao động mới', ne: 'नयाँ रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '원 근무처 이적동의서 (고용주 합의)', en: 'Transfer Consent from Employer', vn: 'Đồng ý chuyển nơi làm việc', ne: 'स्थानान्तरण सहमति' }, type: 'personal' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '신규 사업장 사업자등록증 사본', en: 'New Business License', vn: 'Giấy phép kinh doanh mới', ne: 'नयाँ व्यवसाय दर्ता' }, type: 'company' },
+      { name: { kr: '신규 사업장 국세·지방세 완납증명서', en: 'New Company Tax Certificates', vn: 'Chứng nhận nộp thuế công ty mới', ne: 'कम्पनी कर प्रमाणपत्रहरू' }, type: 'company' },
+      { name: { kr: '4대보험 사업장 가입자 명부', en: '4-Major Insurance Workplace List', vn: 'Danh sách 4 bảo hiểm', ne: '४ प्रमुख बीमा सूची' }, type: 'company' }
+    ],
+    'chk_alien_reg': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '표준근로계약서 사본', en: 'Employment Contract', vn: 'Hợp đồng lao động', ne: 'रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '여권 원본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매 (3.5cm x 4.5cm)', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' },
+      { name: { kr: '4대보험 사업장 가입자 명부', en: '4-Major Insurance List', vn: 'Danh sách 4 bảo hiểm', ne: '४ प्रमुख बीमा सूची' }, type: 'company' }
+    ],
+    'chk_reissue': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 원본 및 사본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매 (3.5cm x 4.5cm)', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '등록증 분실/훼손 사유서', en: 'Statement of Reason (Lost/Damaged)', vn: 'Lý do mất hoặc hỏng thẻ', ne: 'हराएको/क्षतिग्रस्त कारण फारम' }, type: 'personal' },
+      { name: { kr: '재직증명서', en: 'Certificate of Employment', vn: 'Giấy chứng nhận công tác', ne: 'रोजगार प्रमाणपत्र' }, type: 'company' }
+    ],
+    'chk_reentry': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Alien Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी कार्ड' }, type: 'personal' },
+      { name: { kr: '재입국 사유 소명서 또는 휴가확인서', en: 'Re-entry Reason / Leave Proof', vn: 'Giấy xác nhận nghỉ phép', ne: 'बिदा प्रमाणपत्र' }, type: 'company' }
+    ],
+    'default': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee', vn: 'Giấy bảo lãnh', ne: 'ग्यारेन्टी फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '표준근로계약서 사본', en: 'Employment Contract', vn: 'Hợp đồng lao động', ne: 'रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' },
+      { name: { kr: '4대보험 가입자 명부', en: '4-Major Insurance Workplace List', vn: 'Danh sách 4 bảo hiểm', ne: '४ प्रमुख बीमा सूची' }, type: 'company' }
+    ]
+  },
+  'F-2-R': {
+    'chk_change_status': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '지역특화 거주(F-2-R) 지자체장 추천서', en: 'Local Government Recommendation Letter', vn: 'Thư giới thiệu của địa phương (F-2-R)', ne: 'स्थानीय सरकार सिफारिस पत्र' }, type: 'company' },
+      { name: { kr: '표준근로계약서 사본', en: 'Standard Employment Contract', vn: 'Hợp đồng lao động tiêu chuẩn', ne: 'मानक रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서 및 임대차계약서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '한국어능력 입증서류 (KIIP 3단계 이상 또는 TOPIK 3급 이상)', en: 'Korean Proficiency Proof (KIIP 3+ or TOPIK 3+)', vn: 'Chứng chỉ tiếng Hàn (KIIP 3 trở lên)', ne: 'कोरियाली भाषा प्रमाण (KIIP ३ वा माथि)' }, type: 'personal' },
+      { name: { kr: '소득금액증명원 (전년도 국민총소득 70% 이상)', en: 'Proof of Income (GNI 70%+)', vn: 'Chứng minh thu nhập (70%+ GNI)', ne: 'आय प्रमाण' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본 및 4대보험 명부', en: 'Business License & Insurance List', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' }
+    ],
+    'chk_extension': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '재직증명서 및 근로계약서', en: 'Certificate of Employment & Contract', vn: 'Giấy chứng nhận công tác & Hợp đồng', ne: 'रोजगार प्रमाणपत्र र सम्झौता' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '전년도 소득금액증명원 (홈택스 발급)', en: 'Proof of Personal Income (Hometax)', vn: 'Chứng minh thu nhập năm trước', ne: 'अघिल्लो वर्षको आय प्रमाण' }, type: 'personal' },
+      { name: { kr: '사업장 사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' },
+      { name: { kr: '4대보험 사업장 가입자 명부', en: '4-Major Insurance List', vn: 'Danh sách 4 bảo hiểm', ne: '४ प्रमुख बीमा सूची' }, type: 'company' }
+    ],
+    'chk_change_work': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '지역특화 거주(F-2-R) 지자체장 변경 승인서', en: 'Local Gov Change Approval', vn: 'Chấp thuận thay đổi của địa phương', ne: 'स्थानीय सरकार परिवर्तन स्वीकृति' }, type: 'company' },
+      { name: { kr: '신규 표준근로계약서 사본', en: 'New Employment Contract', vn: 'Hợp đồng lao động mới', ne: 'नयाँ रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '원 근무처 이적동의서 (또는 퇴직증명서)', en: 'Transfer Consent from Employer', vn: 'Đồng ý chuyển nơi làm việc', ne: 'स्थानान्तरण सहमति' }, type: 'personal' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '신규 사업장 사업자등록증 사본', en: 'New Business License', vn: 'Giấy phép kinh doanh mới', ne: 'नयाँ व्यवसाय दर्ता' }, type: 'company' },
+      { name: { kr: '신규 사업장 4대보험 명부', en: 'New 4-Major Insurance List', vn: 'Danh sách 4 bảo hiểm mới', ne: 'नयाँ ४ प्रमुख बीमा सूची' }, type: 'company' }
+    ],
+    'chk_alien_reg': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '지역특화 거주(F-2-R) 지자체장 추천서 원본', en: 'Local Government Recommendation', vn: 'Thư giới thiệu của địa phương', ne: 'स्थानीय सरकार सिफारिस' }, type: 'company' },
+      { name: { kr: '거주/숙소제공 확인서 및 임대차계약서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '여권 원본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매 (3.5cm x 4.5cm)', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' },
+      { name: { kr: '4대보험 가입자 명부', en: '4-Major Insurance List', vn: 'Danh sách 4 bảo hiểm', ne: '४ प्रमुख बीमा सूची' }, type: 'company' }
+    ],
+    'chk_reissue': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 원본 및 사본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매 (3.5cm x 4.5cm)', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '등록증 분실/훼손 사유서', en: 'Statement of Reason (Lost/Damaged)', vn: 'Lý do mất hoặc hỏng thẻ', ne: 'हराएको/क्षतिग्रस्त कारण फारम' }, type: 'personal' }
+    ],
+    'chk_reentry': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' }
+    ],
+    'default': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '표준근로계약서 사본', en: 'Standard Employment Contract', vn: 'Hợp đồng lao động tiêu chuẩn', ne: 'मानक रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본', en: 'Copy of Business License', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' }
+    ]
+  },
+  'E-9': {
+    'chk_alien_reg': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '여권 원본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매 (3.5cm x 4.5cm)', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
       { name: { kr: '마약검사확인서', en: 'Drug Test Certificate', vn: 'Giấy chứng nhận kiểm tra ma túy', ne: 'लागूपदार्थ परीक्षण प्रमाणपत्र' }, type: 'personal' },
       { name: { kr: '사업자 등록증 사본', en: 'Copy of business license', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ताको प्रतिलिपि' }, type: 'company' },
       { name: { kr: '고용허가서 사본', en: 'Copy of employment permit', vn: 'Bản sao giấy phép lao động', ne: 'रोजगार अनुमति पत्रको प्रतिलिपि' }, type: 'company' },
@@ -604,19 +864,39 @@ export const docMatrix: Record<string, Record<string, RequiredDoc[]>> = {
       { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
       { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
       { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
-      { name: { kr: '여권', en: 'Passport or Entry Permit for Foreigners', vn: 'Hộ chiếu hoặc Giấy phép nhập cảnh cho người nước ngoài', ne: 'विदेशीहरूको लागि राहदानी वा प्रवेश अनुमति' }, type: 'personal' },
+      { name: { kr: '여권', en: 'Passport or Entry Permit for Foreigners', vn: 'Hộ chiếu 또는 Giấy phép nhập cảnh', ne: 'राहदानी' }, type: 'personal' },
       { name: { kr: '외국인 등록증', en: 'Foreigner Registration Card', vn: 'Thẻ đăng ký người nước ngoài', ne: 'विदेशी दर्ता कार्ड' }, type: 'personal' },
       { name: { kr: '고용허가서 사본', en: 'Copy of employment permit', vn: 'Bản sao giấy phép lao động', ne: 'रोजगार अनुमति पत्रको प्रतिलिपि' }, type: 'company' },
       { name: { kr: '표준근로계약서 사본', en: 'Standard employment contract', vn: 'Hợp đồng lao động tiêu chuẩn', ne: 'मानक रोजगार सम्झौता' }, type: 'company' },
       { name: { kr: '사업자 등록증 사본', en: 'Copy of business license', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ताको प्रतिलिपि' }, type: 'company' }
+    ],
+    'chk_change_status': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '숙련기능인력 점수표 또는 지자체 추천 신청서', en: 'Points Sheet or Regional Recommendation Form', vn: 'Bảng điểm tay nghề hoặc Đơn giới thiệu', ne: 'अंक तालिका वा सिफारिस फारम' }, type: 'auto' },
+      { name: { kr: '표준근로계약서 사본 (2년 이상)', en: 'Standard Employment Contract (2+ yrs)', vn: 'Hợp đồng lao động tiêu chuẩn', ne: 'मानक रोजगार सम्झौता' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee (Form #129)', vn: 'Giấy bảo lãnh (Mẫu số 129)', ne: 'ग्यारेन्टी फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký người nước ngoài', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
+      { name: { kr: '최근 2개년 소득금액증명원 (홈택스 발급)', en: 'Proof of Income for Last 2 Years', vn: 'Chứng minh thu nhập 2 năm gần nhất', ne: 'पछिल्लो २ वर्षको आय प्रमाण' }, type: 'personal' },
+      { name: { kr: '한국어능력 입증서류 (KIIP 이수증 또는 TOPIK)', en: 'Korean Proficiency Proof (KIIP or TOPIK)', vn: 'Chứng chỉ tiếng Hàn', ne: 'कोरियाली भाषा प्रमाण' }, type: 'personal' },
+      { name: { kr: '사업자등록증 사본 및 4대보험 명부', en: 'Business License & 4-Major Insurance List', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' }
     ],
     'chk_reentry': [
       { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
       { name: { kr: '여권', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
       { name: { kr: '외국인등록증', en: 'Foreigner Registration Card', vn: 'Thẻ đăng ký người nước ngoài', ne: 'विदेशी दर्ता कार्ड' }, type: 'personal' }
     ],
+    'chk_reissue': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 원본 및 사본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '분실/훼손 사유서', en: 'Statement of Reason (Lost/Damaged)', vn: 'Lý do mất hoặc hỏng thẻ', ne: 'हराएको/क्षतिग्रस्त कारण फारम' }, type: 'personal' }
+    ],
     'default': [
       { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
       { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký người nước ngoài', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' }
     ]
   },
@@ -634,12 +914,29 @@ export const docMatrix: Record<string, Record<string, RequiredDoc[]>> = {
     ],
     'chk_change_work': [
       { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '신원보증서 (별지 제129호)', en: 'Letter of Guarantee', vn: 'Giấy bảo lãnh', ne: 'ग्यारेन्टी फारम' }, type: 'auto' },
       { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
       { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
       { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký người nước ngoài', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
-      { name: { kr: '고용추천서 (산업통상자원부 등)', en: 'Employment Recommendation (MOTIE)', vn: 'Thư giới thiệu việc làm (MOTIE)', ne: 'रोजगार सिफारिस' }, type: 'company' },
+      { name: { kr: '이적동의서 또는 고용관계 종료 서류', en: 'Transfer Consent from Employer', vn: 'Đồng ý chuyển nơi làm việc', ne: 'स्थानान्तरण सहमति' }, type: 'personal' },
+      { name: { kr: '고용추천서 (소관 중앙부처)', en: 'Employment Recommendation (Gov)', vn: 'Thư giới thiệu việc làm', ne: 'रोजगार सिफारिस' }, type: 'company' },
+      { name: { kr: '새로운 고용계약서 사본', en: 'Employment Contract', vn: 'Hợp đồng lao động', ne: 'रोजगार सम्झौता' }, type: 'company' },
+      { name: { kr: '새로운 사업자등록증 사본', en: 'Copy of business license', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ताको प्रतिलिपि' }, type: 'company' }
+    ],
+    'chk_alien_reg': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy tờ chứng minh nơi cư trú', ne: 'बस्ने ठाउँ प्रमाणित गर्ने कागजात' }, type: 'auto' },
+      { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
+      { name: { kr: '여권 원본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매 (3.5cm x 4.5cm)', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
       { name: { kr: '고용계약서 사본', en: 'Employment Contract', vn: 'Hợp đồng lao động', ne: 'रोजगार सम्झौता' }, type: 'company' },
-      { name: { kr: '사업자등록증 사본', en: 'Copy of business license', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ताको प्रतिलिपि' }, type: 'company' }
+      { name: { kr: '사업자등록증 사본', en: 'Copy of business license', vn: 'Bản sao giấy phép kinh doanh', ne: 'व्यवसाय दर्ता의 प्रतिलिपि' }, type: 'company' }
+    ],
+    'chk_reissue': [
+      { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
+      { name: { kr: '여권 원본 및 사본', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '표준규격사진 1매', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
+      { name: { kr: '분실/훼손 사유서', en: 'Statement of Reason (Lost/Damaged)', vn: 'Lý do mất hoặc hỏng thẻ', ne: 'हराएको/क्षतिग्रस्त कारण फारम' }, type: 'personal' }
     ],
     'chk_reentry': [
       { name: { kr: '통합신청서 (별지 제34호)', en: 'Application form (Template #34)', vn: 'Đơn đăng ký (Mẫu số 34)', ne: 'आवेदन फारम (टेम्प्लेट #34)' }, type: 'auto' },
@@ -653,7 +950,7 @@ export const docMatrix: Record<string, Record<string, RequiredDoc[]>> = {
       { name: { kr: '외국인 직업 및 연간 소득금액 신고서', en: 'Occupation & Income Declaration', vn: 'Tờ khai Nghề nghiệp & Thu nhập', ne: 'पेशा र आय घोषणा फारम' }, type: 'auto' },
       { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu và Thẻ đăng ký người nước ngoài', ne: 'राहदानी र विदेशी दर्ता कार्ड' }, type: 'personal' },
       { name: { kr: '소득금액증명원 (홈택스 발급)', en: 'Proof of Personal Income (Hometax)', vn: 'Chứng minh thu nhập cá nhân (Hometax)', ne: 'व्यक्तिगत आयको प्रमाण (Hometax)' }, type: 'personal' },
-      { name: { kr: '자격 요건 입증 서류 (기능검정 합격증 등)', en: 'Proof of Qualifications (Skills test etc.)', vn: 'Giấy tờ chứng minh trình độ', ne: 'योग्यताको प्रमाण' }, type: 'personal' },
+      { name: { kr: '자격 요건 입증 서류 (학위증, 자격증, 경력증명서 등)', en: 'Proof of Qualifications (Degree, License etc.)', vn: 'Giấy tờ chứng minh trình độ', ne: 'योग्यताको प्रमाण' }, type: 'personal' },
       { name: { kr: '고용계약서 및 사업자등록증', en: 'Standard employment contract and Copy of business license', vn: 'Hợp đồng lao động tiêu chuẩn và Bản sao giấy phép kinh doanh', ne: 'मानक रोजगार सम्झौता र व्यवसाय दर्ताको प्रतिलिपि' }, type: 'company' }
     ],
     'default': [
